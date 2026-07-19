@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAY 2</title>
+</head>
+<body>
+    <script src="day2.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+let arr = [1, 4, "x", 16, 25]
+let missing_no = null
+
+let diff_array = []
+
+for (let i = 0; i < arr.length - 1; i++) {
+    diff_array.push(arr[i + 1] - arr[i])
+}
+
+console.log("diff_array", diff_array);
+
+//removing NaN from diff_array
+function removeNaN(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (Number.isNaN(arr[i])) {
+            for (let j = i; j < arr.length; j++) {
+                arr[j] = arr[j + 1]
+            }
+            arr.length--
+            i--
+        }
+    }
+}
+
+removeNaN(diff_array)
+console.log("new diff_array", diff_array)
+
+let ratio_array = []
+
+for (let i = 0; i < arr.length - 1; i++) {
+    ratio_array.push(arr[i + 1] / arr[i])
+}
+
+console.log("ratio_array", ratio_array);
+
+removeNaN(ratio_array)
+console.log("new ratio_array", ratio_array)
+
+let diff = null
+let ratio = null
+
+//arithmetic sequence
+if (diff_array[0] === diff_array[diff_array.length - 0 - 2] &&
+    diff_array[diff_array.length - 0 - 2] === diff_array[diff_array.length - 0 - 1]) {
+    diff = diff_array[0]
+    console.log("diff", diff);
+
+    if (arr[0] === "x") {
+        missing_no = arr[1] - diff
+    }
+    else {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === "x") {
+                missing_no = arr[i - 1] + diff
+            }
+        }
+    }
+}
+
+//geometric sequence
+else if (ratio_array[0] === ratio_array[ratio_array.length - 2] &&
+    ratio_array[ratio_array.length - 2] === ratio_array[ratio_array.length - 1]) {
+    ratio = ratio_array[0]
+    console.log("ratio", ratio);
+
+    if (arr[0] === "x") {
+        missing_no = arr[1] / ratio
+    }
+    else {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === "x") {
+                missing_no = arr[i - 1] * ratio
+            }
+        }
+    }
+}
+
+//squares and cubes
+else if (arr) {
+
+}
+
+console.log("missing no:", missing_no) -->
