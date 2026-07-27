@@ -53,7 +53,7 @@ if (string === reversed) {
     console.log("the string is palindrome")
 }
 else {
-    console.log("Sorry guyz; failed");
+    console.log("Sorry guyz; palindrome failed");
 }
 
 //count vowels
@@ -144,5 +144,106 @@ for (let i = 0; i < new_string.length; i++) {
 console.log("Every 1st letter capitalized", new_string)
 
 //longest word
-// let string = " level hai bhai ka "
+let word = ""
+let words = []
+let value_of_i = -1
 
+if (string[0] === " ") {
+    value_of_i = 0
+}
+
+for (let i = 1; i < string.length; i++) {
+    if (string[i] === " ") {
+        for (let j = value_of_i + 1; j < i; j++) {
+            word += string[j]
+        }
+        value_of_i = i
+        // console.log("word", word)
+        words.push(word)
+        word = ""
+    }
+}
+
+if (string[string.length - 1] !== " ") {
+    for (let k = value_of_i + 1; k < string.length; k++) {
+        word += string[k]
+    }
+    words.push(word)
+}
+
+console.log("words", words)
+console.log("no of words", words.length)
+
+let longest = words[0]
+for (let i = 1; i < words.length; i++) {
+    if (longest.length < words[i].length) {
+        longest = words[i]
+    }
+}
+
+console.log("longest word:", longest)
+
+//character frequency
+string = "level"
+let char_obj = {}
+let count = 0
+
+for (let i = 0; i < string.length; i++) { //string[3]="e"
+    if (string[i] !== " ") {
+        for (let j = 0; j < string.length; j++) {
+            if (string[i] === string[j]) {
+                count += 1
+            }
+        }
+        char_obj[string[i]] = count
+        count = 0
+    }
+}
+
+console.log("char obj", char_obj);
+
+//is m agr level hai to last waley l ke liye again condition ja ri , even answer thk h but .. so handle this
+
+//remove spaces
+
+// string = "I am haniya sahar." //i=17 //l=18
+
+// for (let i = 0; i < string.length; i++) { //i=1
+//     if (string[i] === " ") {
+//         for (let j = i; j < string.length - 1; j++) {
+//             string[j] = string[j + 1]
+//         }
+//         string.length--
+//         console.log("hehe", string)
+//     }
+// }
+
+// console.log("string_witout_spaces", string)
+
+// not gonna work bcz elements of strings cant be changed like arrays, so must change it to an array and then ...
+
+string = "I am haniya sahar."
+let array = string.split("")
+
+for (let i = 0; i < array.length; i++) { //i=1
+    if (array[i] === " ") {
+        for (let j = i; j < array.length - 1; j++) {
+            array[j] = array[j + 1]
+        }
+        array.length--
+    }
+}
+
+let string_witout_spaces = array.join("")
+console.log("string_witout_spaces", string_witout_spaces)
+
+//but better practice for dsa is (without using methods)
+
+string = "I am haniya sahar." //i=17 //l=18
+let str = ""
+
+for (let i = 0; i < string.length; i++) {
+if(string[i]===" "){
+    
+}
+}
