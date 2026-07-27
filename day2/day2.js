@@ -32,11 +32,15 @@ for (let i = 0; i < arr2.length; i++) {
 
 console.log(new_array);
 
-//remove duplicates
-//common elements
+//
+
 
 //missig no.
-let arr = [1,4,9,"x",25]
+// let arr = [4, 16, "x", 256, 1024]
+// let arr = ["x", 1, 9, 25, 49, 81, 121]
+// let arr = ["x", 8, 27, 64, 125, 216]
+let arr = [3, 9, 27, 81, "x"]
+console.log("original array", arr)
 let missing_no = null
 
 function removeNaN(arr) {
@@ -51,7 +55,7 @@ function removeNaN(arr) {
     }
 }
 
-function arithmetic_missing(arr) {
+function arithmetic_missing(arr, arr_original) {
     let diff_array = []
     let diff = null
 
@@ -68,21 +72,23 @@ function arithmetic_missing(arr) {
         diff = diff_array[0]
         console.log("diff", diff);
 
-        if (arr[0] === "x") {
+        if (arr_original[0] === "x") {
             missing_no = arr[1] - diff
         }
         else {
             for (let i = 0; i < arr.length; i++) {
-                if (arr[i] === "x") {
+                if (arr_original[i] === "x") {
                     missing_no = arr[i - 1] + diff
                 }
             }
         }
-        console.log("hoho",missing_no)
+        console.log("arithmetic missin", missing_no)
+        return true
     }
+    else { return }
 }
 
-function geometric_missing(arr) {
+function geometric_missing(arr, arr_original) {
     let ratio_array = []
     let ratio = null
 
@@ -99,38 +105,92 @@ function geometric_missing(arr) {
         ratio = ratio_array[0]
         console.log("ratio", ratio);
 
-        if (arr[0] === "x") {
+        if (arr_original[0] === "x") {
             missing_no = arr[1] / ratio
         }
         else {
             for (let i = 0; i < arr.length; i++) {
-                if (arr[i] === "x") {
+                if (arr_original[i] === "x") {
                     missing_no = arr[i - 1] * ratio
                 }
             }
         }
+        console.log("geometric missin", missing_no)
+        return true
     }
+    else { return }
 }
 
 function square_missing(arr) {
     let rooted_array = []
+    let condition_for_square_missing = true
 
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length; i++) {
         rooted_array.push(Math.sqrt(arr[i]))
     }
 
     console.log("rooted_array", rooted_array);
 
-    arithmetic_missing(rooted_array)
-    geometric_missing(rooted_array)
+    let rooted_array_no_NaN = []
+    //copying the rooted_array
+    for (let i = 0; i < rooted_array.length; i++) {
+        rooted_array_no_NaN[i] = rooted_array[i]
+    }
+    removeNaN(rooted_array_no_NaN)
+    console.log("rooted_array_no_NaN", rooted_array_no_NaN)
+    console.log("rooted array is same", rooted_array)
 
-    missing_no = missing_no * missing_no
-    //[1,2,NaN,4,5]
-    // arr=rooted_array
+    for (let i = 0; i < rooted_array_no_NaN.length; i++) {
+        if (rooted_array_no_NaN[i] % 1 !== 0) {
+            condition_for_square_missing = false
+
+        }
+    }
+    console.log("condition", condition_for_square_missing)
+
+    if (condition_for_square_missing) {
+        arithmetic_missing(rooted_array, arr)
+        missing_no = missing_no * missing_no
+        return true
+    }
+    else { return }
 }
 
-arithmetic_missing(arr)
-geometric_missing(arr)
-square_missing(arr)
+function cube_missing(arr) {
+    let rooted_array = []
+    let condition_for_cube_missing = true
+
+    for (let i = 0; i < arr.length; i++) {
+        rooted_array.push(Math.cbrt(arr[i]))
+    }
+
+    console.log("rooted_array", rooted_array);
+
+    let rooted_array_no_NaN = []
+    //copying the rooted_array
+    for (let i = 0; i < rooted_array.length; i++) {
+        rooted_array_no_NaN[i] = rooted_array[i]
+    }
+    removeNaN(rooted_array_no_NaN)
+    console.log("rooted_array_no_NaN", rooted_array_no_NaN)
+    console.log("rooted array is same", rooted_array)
+
+    for (let i = 0; i < rooted_array_no_NaN.length; i++) {
+        if (rooted_array_no_NaN[i] % 1 !== 0) {
+            condition_for_cube_missing = false
+
+        }
+    }
+    console.log("condition", condition_for_cube_missing)
+
+    if (condition_for_cube_missing) {
+        arithmetic_missing(rooted_array, arr)
+        missing_no = missing_no * missing_no * missing_no
+    }
+}
+
+arithmetic_missing(arr, arr) ||
+
+    (geometric_missing(arr, arr) || square_missing(arr) || cube_missing(arr))
 
 console.log("missing no:", missing_no)
