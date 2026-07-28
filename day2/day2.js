@@ -194,3 +194,47 @@ arithmetic_missing(arr, arr) ||
     (geometric_missing(arr, arr) || square_missing(arr) || cube_missing(arr))
 
 console.log("missing no:", missing_no)
+
+
+
+
+
+
+
+//common elements
+let arr3 = [1, 2, 3, 4, 5, 4, 7, 7]
+
+let common_elements = []
+for (let i = 0; i < arr3.length; i++) {
+
+    for (let j = 0; j < arr3.length; j++) {
+        if (i !== j && arr3[i] === arr3[j]) {
+            common_elements.push(arr3[i])
+        }
+    }
+}
+console.log("common elements", common_elements);
+
+//[4,4,7,7]
+// let arr3 = [1, 2, 3, 4, 5, 4, 7, 7]
+
+//  [1, 2, 3, 5, 4, 7, 7]
+
+common_elements = [4, 7]
+//remove duplicates
+for (let i = 0; i < arr3.length; i++) { //i=3
+    for (let j = 0; j < common_elements.length; j++) {
+        if (arr3[i] === common_elements[j]) {
+            for (let k = i; k < arr3.length; k++) {
+                arr3[k] = arr3[k + 1]
+            }
+            // arr3.length--
+            // i--
+            console.log(i,);
+        }
+    }
+}
+
+console.log("removing duples", arr3);
+
+// result: [1,2,3,4,5,7]

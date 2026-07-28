@@ -1,42 +1,3 @@
-//common elements
-let arr3 = [1, 2, 3, 4, 5, 4, 7, 7]
-
-let common_elements = []
-for (let i = 0; i < arr3.length; i++) {
-
-    for (let j = 0; j < arr3.length; j++) {
-        if (i !== j && arr3[i] === arr3[j]) {
-            common_elements.push(arr3[i])
-        }
-    }
-}
-console.log("common elements", common_elements);
-
-//[4,4,7,7]
-// let arr3 = [1, 2, 3, 4, 5, 4, 7, 7]
-
-//  [1, 2, 3, 5, 4, 7, 7]
-
-common_elements = [4, 7]
-//remove duplicates
-for (let i = 0; i < arr3.length; i++) { //i=3
-    for (let j = 0; j < common_elements.length; j++) {
-        if (arr3[i] === common_elements[j]) {
-            for (let k = i; k < arr3.length; k++) {
-                arr3[k] = arr3[k + 1]
-            }
-            // arr3.length--
-            // i--
-            console.log(i,);
-        }
-    }
-}
-
-console.log("removing duples", arr3);
-
-// result: [1,2,3,4,5,7]
-
-
 //reverse string 
 let string = " level hai bhai ka "
 let reversed = ""
@@ -222,7 +183,7 @@ console.log("char obj", char_obj);
 
 // not gonna work bcz elements of strings cant be changed like arrays, so must change it to an array and then ...
 
-string = "I am haniya sahar."
+string = " I am haniya sahar . "
 let array = string.split("")
 
 for (let i = 0; i < array.length; i++) { //i=1
@@ -239,11 +200,50 @@ console.log("string_witout_spaces", string_witout_spaces)
 
 //but better practice for dsa is (without using methods)
 
-string = "I am haniya sahar." //i=17 //l=18
 let str = ""
 
-for (let i = 0; i < string.length; i++) {
-if(string[i]===" "){
-    
+for (let i = 0; i < string.length; i++) { //i=1
+    if (string[i] === " ") {
+        for (let j = 0; j < i; j++) {
+            str += string[j]
+        }
+        for (let k = i + 1; k < string.length; k++) {
+            str += string[k]
+        }
+        string = str
+        str = ""
+        // console.log(string)
+    }
 }
+
+console.log("string_witout_spaces manual", string)
+
+//remove duplicate letters
+
+//anagram
+const word1 = "silent" // if "aa"
+const word2 = "listen" // and "ab" then boom
+let results = []
+let result = false
+let used_j = []
+
+if (word1.length === word2.length) {
+    for (let i = 0; i < word1.length; i++) {
+        for (let j = 0; j < word1.length && j !== used_j[0]; j++) {
+            if (word1[i] === word2[j]) { //i=0 and j=0
+                used_j.push(j)
+                results.push(true)
+                //ye wala j jo abhi h ex, 0 ye ab phr word2 m se nikl jana chaiyye ek trh se like ... use ab take part ni krna chaiyye
+                j = word1.length
+            }
+        }
+    }
+    if (results.length === word1.length) {
+        result = true
+    }
 }
+
+console.log(results);
+console.log("anagram is", result)
+console.log("used j", used_j);
+
