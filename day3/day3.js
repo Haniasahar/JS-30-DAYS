@@ -220,30 +220,40 @@ console.log("string_witout_spaces manual", string)
 
 //remove duplicate letters
 
+
 //anagram
-const word1 = "silent" // if "aa"
-const word2 = "listen" // and "ab" then boom
+const word1 = "silent" 
+const word2 = "listen"
 let results = []
 let result = false
 let used_j = []
 
 if (word1.length === word2.length) {
-    for (let i = 0; i < word1.length; i++) {
-        for (let j = 0; j < word1.length && j !== used_j[0]; j++) {
-            if (word1[i] === word2[j]) { //i=0 and j=0
+    for (let i = 0; i < word1.length; i++) {//i=3
+        for (let j = 0; j < word1.length; j++) {//j=1
+            for (let k = 0; k < used_j.length; k++) {//k=2
+                if (j === used_j[k]) {
+                    j += 1 //try doin it without modifying i j k here "k by yourself"
+                    k = -1
+                }
+            }
+
+            console.log("i", i, "all j's", j)
+            if (word1[i] === word2[j]) {
+                console.log("hehe j", j)
                 used_j.push(j)
+                console.log("used j", used_j);
                 results.push(true)
-                //ye wala j jo abhi h ex, 0 ye ab phr word2 m se nikl jana chaiyye ek trh se like ... use ab take part ni krna chaiyye
                 j = word1.length
             }
         }
     }
-    if (results.length === word1.length) {
-        result = true
-    }
+}
+
+
+if (results.length === word1.length) {
+    result = true
 }
 
 console.log(results);
 console.log("anagram is", result)
-console.log("used j", used_j);
-

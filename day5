@@ -67,33 +67,28 @@ function maxCols(array) {
     return max_cols
 }
 
-function isValid(array, max_cols) {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i][max_cols - 1] === undefined) {
-            return false
-        }
-    }
-    return true
+function isValid(){
+    
 }
 
 //matrix sum
 let arr = [
-    [1, 5, 6],
-    [4, 0, 0]
+    [1, 2, 3],
+    [4, 5, 6]
 ]
 
 let sum = 0
 let cols = maxCols(arr)
-let valid = isValid(arr, cols)
 
-console.log("rows", arr.length, "max-columns", cols, "valid?", valid)
+console.log("rows", arr.length, "columns", cols)
 
-if (valid === false) {
-    console.log("invalid matrix")
-    sum = null
-}
-else {
-    for (let i = 0; i < arr.length; i++) {
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i][cols - 1] === undefined) {
+        console.log("invalid matrix")
+        i = arr.length //find cleaner way to end loop afterwards
+        sum = 0
+    }
+    else {
         for (let j = 0; j < cols; j++) {
             sum += arr[i][j]
         }
@@ -112,6 +107,8 @@ for (let i = 0; i < 2; i++) {
     }
 }
 
+console.log("desired", matrix);
+
 matrix = []
 let num = 0
 
@@ -122,6 +119,8 @@ for (let i = 0; i < 2; i++) {
         num = matrix[i][j]
     }
 }
+
+console.log("desired 2nd", matrix);
 
 //matrix transpose
 arr = [
@@ -134,19 +133,19 @@ arr = [
     // [7, 8, 9, 4, 5],
     // [6, 7, 1, 9, 0],
     // [1, 2, 3, 2, 2]
+
 ]
 
 let tr_arr = []
 let columns = maxCols(arr)
-let validation = isValid(arr, columns)
 
-if (validation === false) {
-    console.log("invalid matrix, can't tranpose");
-}
-else {
-    for (let i = 0; i < columns; i++) {
-        tr_arr[i] = []
-        for (let j = 0; j < arr.length; j++) {
+for (let i = 0; i < columns; i++) {
+    tr_arr[i] = []
+    for (let j = 0; j < arr.length; j++) {
+        if (i === j) {
+            tr_arr[i][j] = arr[i][j]
+        }
+        else if (i !== j) {
             tr_arr[i][j] = arr[j][i]
         }
     }
@@ -157,37 +156,4 @@ console.log("transposed", tr_arr);
 //pattern print
 //square
 
-function printt(key, no) {
-    let row = ""
-    for (let i = 0; i < no; i++) {
-        row += key
-    }
-    return row
-}
-
-let number = 4
-let key = "*"
-
-for (let i = 0; i < number; i++) {
-    console.log(printt(key, number))
-}
-
-//triangle
-
-for (let i = 0; i < number; i++) {
-    console.log(printt("+", i + 1));
-}
-
-//pyramid
-
-//    *
-//   ***
-//  *****
-// *******
-
-let temp = 1
-
-for (let i = 0; i < number; i++) {
-    console.log(printt(key, temp));
-    temp += 2
-}
+let input = 3
