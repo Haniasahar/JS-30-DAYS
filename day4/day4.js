@@ -155,9 +155,9 @@ else {
 console.log("transposed", tr_arr);
 
 //pattern print
-//square
 
-function printt(key, no) {
+//square
+function build_row(key, no) {
     let row = ""
     for (let i = 0; i < no; i++) {
         row += key
@@ -169,25 +169,100 @@ let number = 4
 let key = "*"
 
 for (let i = 0; i < number; i++) {
-    console.log(printt(key, number))
+    console.log(build_row(key, number))
 }
 
 //triangle
-
 for (let i = 0; i < number; i++) {
-    console.log(printt("+", i + 1));
+    console.log(build_row("+", i + 1));
 }
 
 //pyramid
-
-//    *
-//   ***
-//  *****
-// *******
-
-let temp = 1
+let no_of_keys = 1
 
 for (let i = 0; i < number; i++) {
-    console.log(printt(key, temp));
-    temp += 2
+    console.log(build_row(" ", number - i - 1) + build_row(key, no_of_keys));
+    no_of_keys += 2
 }
+
+//table
+
+let table_of = 9
+
+for (let i = 1; i <= 10; i++) {
+    console.log(table_of, "*", i, "=", table_of * i)
+}
+
+//spiral print
+function spiralPrint(arr) {
+    let output = ""
+    let arr_cols = maxCols(arr)
+    let arr_valid = isValid(arr, arr_cols)
+
+    let arr_inside = []
+
+    if (arr_valid === false) {
+        console.log("invalid matrix")
+        output = null
+    }
+    else {
+        for (let i = 0; i < arr.length; i++) { //0,1,2,3,4
+            output += arr[0][i]
+        }
+        for (let j = 1; j < arr_cols - 1; j++) { //1,2,3
+            output += arr[j][arr_cols - 1]
+        }
+        for (let j = 0; j < arr_cols; j++) { //0,1,2,3,4
+            output += arr[arr.length - 1][arr_cols - j - 1]
+        }
+
+        for (let j = arr_cols - 2; j > 0; j--) { //3,2,1
+            output += arr[j][0]
+        }
+
+        for (let i = 1; i < arr.length - 1; i++) { //1,2
+            output += arr[i][1]
+            arr_inside[i - 1] = []
+            for (let j = 1; j < arr_cols - 1; j++) { //1,2
+                arr_inside[i - 1][j - 1] = arr[i][j]
+            }
+        }
+    }
+    return [output, arr_inside]
+}
+
+arr = [
+    // [5]
+
+    [1, 2],
+    [3, 4]
+
+    // [1, 2, 3],
+    // [4, 5, 6],
+    // [7, 8, 9]
+
+    // [1, 2, 3, 0],
+    // [4, 5, 6, 0],
+    // [7, 8, 9, 0],
+    // [1, 2, 1, 1]
+
+    // [1, 2, 3, 0, 1],
+    // [4, 5, 6, 2, 3],
+    // [7, 8, 9, 4, 5],
+    // [6, 7, 1, 9, 0],
+    // [1, 2, 3, 2, 2]
+]
+
+let [output, arr_inside] = spiralPrint(arr)
+console.log("arr_inside", arr_inside)
+console.log("output", output)
+
+arr = arr_inside
+console.log("arr now", arr);
+
+if (arr_inside.length > 1) {
+    let [new_output, new_arr_inside] = spiralPrint(arr)
+    console.log("hehe")
+    output += new_output
+}
+console.log("output", output)
