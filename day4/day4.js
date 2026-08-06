@@ -198,7 +198,7 @@ function spiralPrint(arr) {
     let output = ""
     let arr_cols = maxCols(arr)
     let arr_valid = isValid(arr, arr_cols)
-
+    console.log(arr_cols, arr_valid, arr.length);
     let arr_inside = []
 
     if (arr_valid === false) {
@@ -206,24 +206,29 @@ function spiralPrint(arr) {
         output = null
     }
     else {
-        for (let i = 0; i < arr.length; i++) { //0,1,2,3,4
+        for (let i = 0; i < arr_cols; i++) {
             output += arr[0][i]
+            output += " "
         }
-        for (let j = 1; j < arr_cols - 1; j++) { //1,2,3
+        for (let j = 1; j < arr.length - 1; j++) {
             output += arr[j][arr_cols - 1]
+            output += " "
         }
-        for (let j = 0; j < arr_cols; j++) { //0,1,2,3,4
-            output += arr[arr.length - 1][arr_cols - j - 1]
+        if (arr.length !== 1) {
+            for (let j = 0; j < arr_cols; j++) {
+                output += arr[arr.length - 1][arr_cols - j - 1]
+                output += " "
+            }
         }
-
-        for (let j = arr_cols - 2; j > 0; j--) { //3,2,1
-            output += arr[j][0]
+        if (arr_cols > 1) {
+            for (let j = arr.length - 2; j > 0; j--) {
+                output += arr[j][0]
+                output += " "
+            }
         }
-
-        for (let i = 1; i < arr.length - 1; i++) { //1,2
-            output += arr[i][1]
+        for (let i = 1; i < arr.length - 1; i++) {
             arr_inside[i - 1] = []
-            for (let j = 1; j < arr_cols - 1; j++) { //1,2
+            for (let j = 1; j < arr_cols - 1; j++) {
                 arr_inside[i - 1][j - 1] = arr[i][j]
             }
         }
@@ -231,38 +236,18 @@ function spiralPrint(arr) {
     return [output, arr_inside]
 }
 
-arr = [
-    // [5]
-
-    [1, 2],
-    [3, 4]
-
-    // [1, 2, 3],
-    // [4, 5, 6],
-    // [7, 8, 9]
-
-    // [1, 2, 3, 0],
-    // [4, 5, 6, 0],
-    // [7, 8, 9, 0],
-    // [1, 2, 1, 1]
-
-    // [1, 2, 3, 0, 1],
-    // [4, 5, 6, 2, 3],
-    // [7, 8, 9, 4, 5],
-    // [6, 7, 1, 9, 0],
-    // [1, 2, 3, 2, 2]
-]
+arr=[]
 
 let [output, arr_inside] = spiralPrint(arr)
+console.log("output", output)
 console.log("arr_inside", arr_inside)
-console.log("output", output)
 
-arr = arr_inside
-console.log("arr now", arr);
-
-if (arr_inside.length > 1) {
-    let [new_output, new_arr_inside] = spiralPrint(arr)
-    console.log("hehe")
+while (arr_inside.length >= 1) {
+    let [new_output, new_arr_inside] = spiralPrint(arr_inside)
     output += new_output
+    console.log("new output", output)
+    console.log("new arr inside", new_arr_inside)
+    arr_inside = new_arr_inside
 }
-console.log("output", output)
+
+// ended day4 succesfully
